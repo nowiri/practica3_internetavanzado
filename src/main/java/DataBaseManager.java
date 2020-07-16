@@ -28,6 +28,7 @@ public class DataBaseManager {
         crearTablaProducto();
         crearTablaVenta();
         crearTablaVentaProd();
+        crearAdmin();
     }
 
     private static void crearTablaUsuario() throws SQLException{
@@ -85,4 +86,17 @@ public class DataBaseManager {
         statement.close();
         con.close();
     }
+
+    private static void crearAdmin() throws SQLException{
+        String sql = "MERGE INTO USUARIO\n" +
+                "(USUARIO, NOMBRE, PASSWORD)\n" +
+                "VALUES\n" +
+                "('admin','admin','admin')";
+        Connection con = DataBaseServices.getInstancia().getConexion();
+        Statement statement = con.createStatement();
+        statement.execute(sql);
+        statement.close();
+        con.close();
+    }
+
 }
